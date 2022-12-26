@@ -3,7 +3,7 @@ import { Navbar } from './Navbar'
 import { Products } from './Products'
 import {auth,fs} from '../Config/Config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, doc, documentId, DocumentSnapshot, getDoc, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, doc, getDoc} from 'firebase/firestore'
 
 export const Home = () => {
 

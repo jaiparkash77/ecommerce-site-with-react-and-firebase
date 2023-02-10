@@ -3,9 +3,25 @@ import { Navbar } from './Navbar'
 import { Products } from './Products'
 import {auth,fs} from '../Config/Config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, doc, getDoc, getDocs} from 'firebase/firestore'
+import { addDoc, collection, doc, getDoc, getDocs} from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
+
+  // getting current user uid
+  function GetUserUid(){
+    const [uid,setUid]=useState(null);
+    useEffect(()=>{
+      auth.onAuthStateChanged(user=>{
+        if(user){
+          setUid(user.uid);
+        }
+      })
+    },[])
+    return uid;
+  }
+
+  const uid = GetUserUid();
 
   // getting current user function
   function GetCurrentUser(){
@@ -58,6 +74,25 @@ export const Home = () => {
     getProducts();
   },[])
 
+  const navigate = useNavigate();
+  let Product;
+  const addToCart =(product)=>{
+    if(uid !== null){
+      // console.log(product)
+      Product = product;
+      Product['qty'] = 1;
+      Product['TotalProductPrice'] = Product.qty*Product.price;
+      // addDoc(fs,'Cart'+uid,Product).then(()=>{
+      //   console.log("success");
+      // })
+      addDoc(collection(fs,'Cart ' + uid),Product).then(()=>{
+        console.log("success");
+      })
+    }else{
+      navigate('/login');
+    }
+  }
+
   return (
     <>
         <Navbar user={user} />
@@ -66,7 +101,7 @@ export const Home = () => {
           <div className='container-fluid'>
             <h1 className='text-center'>Products</h1>
             <div className='products-box'>
-              <Products products={products} />
+              <Products products={products} addToCart={addToCart} />
             </div>
           </div>
         )}

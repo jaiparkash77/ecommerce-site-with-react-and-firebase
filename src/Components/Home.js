@@ -3,7 +3,7 @@ import { Navbar } from './Navbar'
 import { Products } from './Products'
 import {auth,fs} from '../Config/Config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { addDoc, collection, doc, getDoc, getDocs} from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, setDoc} from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
@@ -82,10 +82,12 @@ export const Home = () => {
       Product = product;
       Product['qty'] = 1;
       Product['TotalProductPrice'] = Product.qty*Product.price;
-      // addDoc(fs,'Cart'+uid,Product).then(()=>{
+      
+      // addDoc(collection(fs,'Cart ' + uid),Product).then(()=>{
       //   console.log("success");
       // })
-      addDoc(collection(fs,'Cart ' + uid),Product).then(()=>{
+      const docRef = doc(collection(fs,'Cart ' + uid),Product.ID);
+      setDoc(docRef,Product).then(()=>{
         console.log("success");
       })
     }else{

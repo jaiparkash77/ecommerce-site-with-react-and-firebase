@@ -3,7 +3,7 @@ import { Navbar } from './Navbar'
 import { Products } from './Products'
 import {auth,fs} from '../Config/Config'
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, doc, getDoc, getDocs, setDoc} from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc} from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 
 export const Home = () => {
@@ -69,10 +69,26 @@ export const Home = () => {
     });
   }
 
-
   useEffect(()=>{
     getProducts();
-  },[])
+  },[]);
+
+  // state of TotalProducts
+  const [totalProducts,setTotalProducts] = useState(0);
+
+  // getting cart products
+  useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+      if(user){
+        const q = query(collection(fs, 'Cart '+ user.uid));
+        onSnapshot(q, (querySnapshot) => {
+          const qty = querySnapshot.docs.length;
+          setTotalProducts(qty);
+        }); 
+      }
+    })
+  },[]);
+  // console.log(totalProducts)
 
   const navigate = useNavigate();
   let Product;
@@ -97,7 +113,7 @@ export const Home = () => {
 
   return (
     <>
-        <Navbar user={user} />
+        <Navbar user={user} totalProducts={totalProducts} />
         <br></br>
         {products.length>0 && (
           <div className='container-fluid'>

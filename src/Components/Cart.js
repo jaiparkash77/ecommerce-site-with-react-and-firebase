@@ -8,13 +8,24 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-import { toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { async } from '@firebase/util';
-
-// toast.configure();
+import { Modal } from './Modal';
 
 export const Cart = () => {
+
+    // show modal state
+    const [showModal,setShowModal] = useState(false);
+
+    // trigger modal
+    const triggerModal=()=>{
+      setShowModal(true);
+    }
+
+    // hide modal
+    const hideModal=()=>{
+      setShowModal(false);
+    }
 
     // getting current user function
     function GetCurrentUser(){
@@ -91,7 +102,6 @@ export const Cart = () => {
 
     const totalPrice = price.reduce(reducerOfPrice,0);
 
-
     // global variable
     let Product;
 
@@ -153,6 +163,15 @@ export const Cart = () => {
   // charging payment
   const navigate = useNavigate();
   const handleToken = async(token)=>{
+    toast('Your order has been placed successfully', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+    });
     // console.log(token);
     const cart = {name:'All Products', totalPrice};
     const response = await axios.post('http://localhost:8080/checkout',{
@@ -161,36 +180,26 @@ export const Cart = () => {
     })
     // console.log(response);
     // let {status} = response.data;
-    // console.log(status)
+    // console.log(status)    
+
     let status="success";
     if(status==="success"){
-      navigate('/');
-      // toast.success('Your order has been placed successfully', {
-      //   position: 'top-right',
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: false,
-      //   draggable: false,
-      //   progress: undefined,
-      // });
+      // navigate('/');
       const uid = auth.currentUser.uid;
       const carts = await getDocs(collection(fs,'Cart '+uid));
       carts.forEach(async(data)=>{
         var id = data.id;
         // console.log(id)
         await deleteDoc(doc(collection(fs,'Cart '+uid),id)).then(()=>{
-          console.log('successfully');
+          console.log('Successfully placed order');
         })            
       })    
+      
 
     }else{
       alert("Something went worng in checkout");
     }
   }
-
-
- 
 
   return (
     <>
@@ -220,13 +229,19 @@ export const Cart = () => {
                       name='All Products'
                       amount={totalPrice*100}
                     ></StripeCheckout>
+                    <h6 className='text-center' style={{marginTop:7+'px'}}>OR</h6>
+                    <button className='btn btn-secondary btn-md' onClick={()=>triggerModal()}>Cash on Delivery</button>
                 </div>
-                <button onClick={delDoc}>Delete</button>
+                <ToastContainer />
             </div>
         )}
         {cartProducts.length<1 && (
             <div className='container-fluid'>No products to show</div>
         )}
+
+        {showModal===true&&
+          <Modal TotalPrice={totalPrice} totalQty={totalQty} hideModal={hideModal} />
+        }
     </>
   )
 }

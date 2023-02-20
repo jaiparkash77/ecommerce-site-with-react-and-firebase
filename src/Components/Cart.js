@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { auth, fs } from '../Config/Config';
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, doc, getDoc, onSnapshot, query, setDoc} from 'firebase/firestore'
+import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc} from 'firebase/firestore'
 import { Navbar } from './Navbar'
 import { CartProducts } from './CartProducts';
 import StripeCheckout from 'react-stripe-checkout';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { async } from '@firebase/util';
+
+// toast.configure();
 
 export const Cart = () => {
 
@@ -142,6 +150,48 @@ export const Cart = () => {
   },[]);
   // console.log(totalProducts)
 
+  // charging payment
+  const navigate = useNavigate();
+  const handleToken = async(token)=>{
+    // console.log(token);
+    const cart = {name:'All Products', totalPrice};
+    const response = await axios.post('http://localhost:8080/checkout',{
+      token,
+      cart
+    })
+    // console.log(response);
+    // let {status} = response.data;
+    // console.log(status)
+    let status="success";
+    if(status==="success"){
+      navigate('/');
+      // toast.success('Your order has been placed successfully', {
+      //   position: 'top-right',
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: false,
+      //   draggable: false,
+      //   progress: undefined,
+      // });
+      const uid = auth.currentUser.uid;
+      const carts = await getDocs(collection(fs,'Cart '+uid));
+      carts.forEach(async(data)=>{
+        var id = data.id;
+        // console.log(id)
+        await deleteDoc(doc(collection(fs,'Cart '+uid),id)).then(()=>{
+          console.log('successfully');
+        })            
+      })    
+
+    }else{
+      alert("Something went worng in checkout");
+    }
+  }
+
+
+ 
+
   return (
     <>
         <Navbar user={user} totalProducts={totalProducts} />
@@ -163,9 +213,15 @@ export const Cart = () => {
                     </div>
                     <br></br>
                     <StripeCheckout
-                    
+                      stripeKey='pk_test_51MbMrQSI0Z5uKwXHcAFZtthSK9Vqec3mZRpbVxy3HnJcBtYolUCc5eMCZzSkifvs6uUAZlXGYfhTQjyQs4gZNra700DVfahwqf'
+                      token={handleToken}
+                      billingAddress
+                      shippingAddress
+                      name='All Products'
+                      amount={totalPrice*100}
                     ></StripeCheckout>
                 </div>
+                <button onClick={delDoc}>Delete</button>
             </div>
         )}
         {cartProducts.length<1 && (

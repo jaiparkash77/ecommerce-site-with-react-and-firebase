@@ -6,7 +6,7 @@ import { Navbar } from './Navbar'
 import { CartProducts } from './CartProducts';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -161,7 +161,7 @@ export const Cart = () => {
   // console.log(totalProducts)
 
   // charging payment
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleToken = async(token)=>{
     toast('Your order has been placed successfully', {
       position: 'top-right',
@@ -174,7 +174,7 @@ export const Cart = () => {
     });
     // console.log(token);
     const cart = {name:'All Products', totalPrice};
-    const response = await axios.post('http://localhost:8080/checkout',{
+    await axios.post('http://localhost:8080/checkout',{
       token,
       cart
     })
@@ -208,7 +208,7 @@ export const Cart = () => {
         {cartProducts.length>0 && (
             <div className='container-fluid'>
                 <h1 className='text-center'>Cart</h1>
-                <div className='products-box'>
+                <div className='products-box cart'>
                     <CartProducts cartProducts={cartProducts} cartProductIncrease={cartProductIncrease} cartProductDecrease={cartProductDecrease} />
                 </div>
                 <div className='summary-box'>

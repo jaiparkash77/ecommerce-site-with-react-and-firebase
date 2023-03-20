@@ -30,14 +30,14 @@ export const Navbar = ({user, totalProducts}) => {
 
                 {user &&<>
                     <div><Link className='navlink' to="/">{user}</Link></div>
+                    <div><Link className='navlink' to="/my-orders">My Orders</Link></div>
                     <div className='cart-menu-btn'>
                         <Link className='navlink' to="cart">
                             <Icon icon={shoppingCart} size={20}/>
                         </Link> 
                         <span className='cart-indicator'>{totalProducts}</span>
                     </div>
-                    <div className='btn btn-danger btn-md'
-                    onClick={handleLogout}>LOGOUT</div>
+                    <div className='btn btn-danger btn-md' onClick={handleLogout}>LOGOUT</div>
                 </>}                     
                                 
             </div>

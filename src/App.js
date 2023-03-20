@@ -6,6 +6,7 @@ import { Login } from './Components/Login';
 import { NotFound } from './Components/NotFound';
 import { AddProducts } from './Components/AddProducts';
 import { Cart } from './Components/Cart';
+import { Orders } from './Components/Orders';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/login' element={<Login />}/>
             <Route path='/add-products' element={<AddProducts />}/>
             <Route path='/cart' element={<Cart />}/>
+            <Route path='/my-orders' element={<Orders />}/>
             <Route path='*' element={<NotFound />}/>
         </Routes>
     </BrowserRouter>

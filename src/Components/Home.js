@@ -117,12 +117,12 @@ export const Home = () => {
     {id: 'ElectronicDevices', text: 'Electronic Devices'},
     {id: 'MobileAccessories', text: 'Mobile Accessories'},
     {id: 'TVAndHomeAppliances', text: 'TV & Home Appliances'},
-    {id: 'SportsAndOutdoors', text: 'Sports & outdoors'},
-    {id: 'HealthAndBeauty', text: 'Health & Beauty'},
-    {id: 'HomeAndLifestyle', text: 'Home & Lifestyle'},
-    {id: 'MensFashion', text: `Men's Fashion`},
-    {id: 'WatchesBagsAndJewellery', text: `Watches, bags & Jewellery`},
-    {id: 'Groceries', text: 'Groceries'},             
+    {id: 'CameraAndAccessories', text: 'Camera & Accessories'},
+    {id: 'LaptopAccessories', text: 'Laptop Accessories'},
+    {id: 'Powerbank', text: 'Powerbank'},
+    {id: 'SmartWearables', text: `Smart Wearables`},
+    {id: 'Storage', text: `Storage`},
+    {id: 'Tablets', text: 'Tablets'},             
   ])
 
   // filtered product state

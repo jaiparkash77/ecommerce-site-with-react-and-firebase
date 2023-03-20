@@ -95,12 +95,12 @@ export const AddProducts = () => {
                     <option>Electronic Devices</option>
                     <option>Mobile Accessories</option>
                     <option>TV & Home Appliances</option>
-                    <option>Sports & outdoors</option>
-                    <option>Health & Beauty</option>
-                    <option>Home & Lifestyle</option>
-                    <option>Men's Fashion</option>
-                    <option>Watches, bags & Jewellery</option>
-                    <option>Groceries</option>
+                    <option>Camera & Accessories</option>
+                    <option>Laptop Accessories</option>
+                    <option>Powerbank</option>
+                    <option>Smart Wearables</option>
+                    <option>Storage</option>
+                    <option>Tablets</option>
                 </select>
                 <br></br>
                 <label>Upload Product Image</label>

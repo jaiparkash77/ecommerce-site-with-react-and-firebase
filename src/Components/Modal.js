@@ -1,13 +1,10 @@
 import { addDoc, collection, deleteDoc, doc, getDoc, getDocs } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import { auth, fs } from '../Config/Config';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Modal = ({TotalPrice,totalQty, hideModal}) => {
-
-    const navigate = useNavigate();
   // form states
   const [cell, setCell]=useState(null);
   const [residentialAddress, setResidentialAddress]=useState('');
@@ -56,7 +53,6 @@ const handleCashOnDelivery=async(e)=>{
         })
     }
     hideModal();
-    // navigate('/');
     
 }
 

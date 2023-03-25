@@ -6,20 +6,6 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { collection, doc, getDoc, onSnapshot, query,  addDoc} from 'firebase/firestore'
 
 export const ContactUs = () => {
-    // getting current user uid
-    function GetUserUid(){
-        const [uid,setUid]=useState(null);
-        useEffect(()=>{
-        auth.onAuthStateChanged(user=>{
-            if(user){
-            setUid(user.uid);
-            }
-        })
-        },[])
-        return uid;
-    }
-
-    const uid = GetUserUid();
 
     // getting current user function
     function GetCurrentUser(){

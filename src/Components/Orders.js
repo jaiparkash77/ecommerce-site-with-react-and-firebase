@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { auth, fs } from '../Config/Config';
 import { onAuthStateChanged } from 'firebase/auth'
-import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc} from 'firebase/firestore'
+import { collection, doc, getDoc, onSnapshot, query} from 'firebase/firestore'
 import { Navbar } from './Navbar'
 import { MyOrders } from './MyOrders';
 

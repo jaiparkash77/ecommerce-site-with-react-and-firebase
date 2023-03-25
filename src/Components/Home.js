@@ -6,6 +6,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc} from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { IndividualFilteredProduct } from './IndividualFilteredProduct'
+import { Footer } from './Footer'
 
 export const Home = () => {
 
@@ -191,7 +192,8 @@ export const Home = () => {
               )}
             </>
           )}
-        </div>
+        </div>        
+        <Footer />
     </>
   )
 }

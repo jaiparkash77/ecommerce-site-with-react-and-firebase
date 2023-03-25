@@ -169,7 +169,8 @@ export const Home = () => {
           {filteredProducts.length>0 &&(
             <div className='my-products'>
               <h1 className='text-center'>{category}</h1>
-              <a href="javascript:void(0)" onClick={returntoAllProducts}>Return to All Products</a>
+              <button onClick={returntoAllProducts}>Return to All Products</button>
+              {/* <a href="javascript:void(0)" onClick={returntoAllProducts}>Return to All Products</a> */}
               <div className='products-box'>
                 {filteredProducts.map(individualFilteredProduct=>(
                   <IndividualFilteredProduct key={individualFilteredProduct.ID} individualFilteredProduct={individualFilteredProduct} addToCart={addToCart} />

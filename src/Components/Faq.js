@@ -7,21 +7,6 @@ import { collection, doc, getDoc, onSnapshot, query} from 'firebase/firestore'
 
 export const Faq = () => {
 
-    // getting current user uid
-  function GetUserUid(){
-    const [uid,setUid]=useState(null);
-    useEffect(()=>{
-      auth.onAuthStateChanged(user=>{
-        if(user){
-          setUid(user.uid);
-        }
-      })
-    },[])
-    return uid;
-  }
-
-  const uid = GetUserUid();
-
   // getting current user function
   function GetCurrentUser(){
     const [user, setUser] = useState(null);

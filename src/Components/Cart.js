@@ -6,12 +6,10 @@ import { Navbar } from './Navbar'
 import { CartProducts } from './CartProducts';
 import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
-// import { useNavigate } from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from './Modal';
-import { Footer } from './Footer';
 
 export const Cart = () => {
 
@@ -243,7 +241,6 @@ export const Cart = () => {
         {showModal===true&&
           <Modal TotalPrice={totalPrice} totalQty={totalQty} hideModal={hideModal} />
         }
-        {/* <Footer /> */}
     </>
   )
 }

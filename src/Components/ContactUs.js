@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react'
-import { Footer } from './Footer';
 import { Navbar } from './Navbar';
 import {auth,fs} from '../Config/Config'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -109,7 +108,6 @@ export const ContactUs = () => {
             </>}
 
         </div>
-        <Footer />
     </>
   )
 }

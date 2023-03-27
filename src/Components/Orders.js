@@ -4,6 +4,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { collection, doc, getDoc, onSnapshot, query} from 'firebase/firestore'
 import { Navbar } from './Navbar'
 import { MyOrders } from './MyOrders';
+import {Footer} from './Footer'
 
 export const Orders = () => {
     // getting current user function
@@ -93,6 +94,7 @@ export const Orders = () => {
         {myProducts.length<1 && (
             <div className='container-fluid'>No products to show</div>
         )}
+        <Footer />
     </>
   )
 }

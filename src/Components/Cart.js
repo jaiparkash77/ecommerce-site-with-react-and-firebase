@@ -11,6 +11,7 @@ import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal } from './Modal';
+import { Footer } from './Footer';
 
 export const Cart = () => {
 
@@ -242,6 +243,7 @@ export const Cart = () => {
         {showModal===true&&
           <Modal TotalPrice={totalPrice} totalQty={totalQty} hideModal={hideModal} />
         }
+        <Footer />
     </>
   )
 }

@@ -18,10 +18,10 @@ export const Footer = ({user, totalProducts}) => {
                 </div>
                 <div className='column2'>
                     <div><Link className='navlink' to={"/contact-us"}>Contact Us</Link></div>
-                    <div><Link className='navlink' to={"/about-us"}>About Us</Link></div>
+                    <div><Link className='navlink' to={"/terms-of-use"}>Terms of Use</Link></div> 
                 </div>                                               
                 <div className='column2'>
-                    <div><Link className='navlink' to={"/terms-of-use"}>Terms of Use</Link></div> 
+                    <div><Link className='navlink' to={"/about-us"}>About Us</Link></div>
                     <div><Link className='navlink' to={"/faq"}>FAQ</Link></div> 
                 </div>                                               
                                 

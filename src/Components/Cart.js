@@ -243,7 +243,7 @@ export const Cart = () => {
         {showModal===true&&
           <Modal TotalPrice={totalPrice} totalQty={totalQty} hideModal={hideModal} />
         }
-        <Footer />
+        {/* <Footer /> */}
     </>
   )
 }
